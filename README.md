@@ -1,14 +1,6 @@
-<!-- Banner Image -->
 
-![thirdweb solidity hardhat get started hero image](hero.png)
 
-<h1 align='center'>Build an Application with Solidity, thirdweb & React</h1>
-
-<p align='center'>This template extends from the <a href='https://replit.com/@thirdweb/Get-Started-with-Solidity-using-Hardhat-and-thirdweb-deploy'>Greeter contract template</a> by building an application on top of the smart contract.</p>
-
-<br />
-
-<b>Tools used in this template: </b>
+<b>Tools used: </b>
 
 - thirdweb [Typescript](https://portal.thirdweb.com/typescript) and [React](https://portal.thirdweb.com/react) SDKs to interact with our smart contract
 
