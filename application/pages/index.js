@@ -2,12 +2,12 @@ import { useContract, useContractRead, Web3Button } from "@thirdweb-dev/react";
 import { useState } from "react";
 
 // Your smart contract address here
-const contractAddress = "0xB08BD1aa7Ee2291c60CE7FfcA4A070Fe2c5936F5";
+const contractAddress = "0x1CF9E250E6EF2a67134B4c1040Bf8e302CF8efA0";
 
 export default function Home() {
   // Get the smart contract
   const { contract } = useContract(
-    "0xB08BD1aa7Ee2291c60CE7FfcA4A070Fe2c5936F5"
+    contractAddress
   );
 
   // Read the current greeting
