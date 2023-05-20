@@ -1,7 +1,4 @@
 const { expect } = require("chai");
-const { ethers } = require("hardhat");
-
-const { expect } = require("chai");
 const { ethers, waffle } = require("hardhat");
 const { utils } = require("ethers");
 
@@ -12,29 +9,28 @@ describe("Trustless Donation", function () {
   let charity;
   let supply = ethers.utils.parseEther("1000");
   
-  beforeEach(async function () {
-    
-    // Deploy contracts for token, NFT, factory, and charity
-
+beforeEach(async function () {
     const DonationToken = await ethers.getContractFactory("DonationToken");
     donationToken = await DonationToken.deploy(supply);
-    
+
     const DonationNFT = await ethers.getContractFactory("DonationNFT");
     donationNFT = await DonationNFT.deploy();
-    
+
     const CharityFactory = await ethers.getContractFactory("CharityFactory");
     charityFactory = await CharityFactory.deploy(donationToken.address, donationNFT.address);
-    
+
     await donationNFT.setCharityFactory(charityFactory.address);
 
-    // Create a charity contract
+    await charityFactory.createCharityContract();
 
-    let owner = await charityFactory.owner()
-    await charityFactory.connect(owner).createCharityContract()
-    
-    charity = await charityFactory.connect(owner).charityContracts(owner.address)
-    charity = await ethers.getContractAt("TrustlessDonation", charity)
-  });
+    const filter = await charityFactory.filters.CharityCreated(null, null);
+    const logs = await charityFactory.queryFilter(filter);
+
+    charity = logs[0].args.charity;
+    charity = await ethers.getContractAt("TrustlessDonation", charity);
+    charityOwner = await charity.charityOwner();
+});
+
 
   it("Donation", async function () {
     // Create a donor and transfer tokens to them
@@ -66,6 +62,6 @@ describe("Trustless Donation", function () {
     await charity.registerSupplier(supplier.address)
     await expect(charity.purchase(supplier.address, amount))
       .to.emit(charity, "Purchase")
-      .withArgs(charity.address, supplier.address, amount);
+      .withArgs(charityOwner, supplier.address, amount);
   });
 });

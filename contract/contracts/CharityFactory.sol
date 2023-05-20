@@ -9,6 +9,7 @@ contract CharityFactory is Ownable {
     DonationToken private _donationToken;
     DonationNFT private _donationNFT;
     mapping(address => TrustlessDonation) public charityContracts;
+    event CharityCreated(address creator, address charity);
 
     constructor(DonationToken donationToken, DonationNFT donationNFT) {
         _donationToken = donationToken;
@@ -20,5 +21,8 @@ contract CharityFactory is Ownable {
         TrustlessDonation newCharity = new TrustlessDonation(_donationToken, _donationNFT, msg.sender);
         charityContracts[msg.sender] = newCharity;
         _donationNFT.addValidCharity(address(newCharity)); // update the validCharities mapping in DonationNFT
+        
+        emit CharityCreated(msg.sender, address(newCharity));
     }
+
 }

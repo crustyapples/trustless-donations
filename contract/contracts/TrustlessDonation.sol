@@ -3,8 +3,6 @@ pragma solidity ^0.8.0;
 import "contracts/DonationToken.sol";
 import "contracts/DonationNFT.sol";
 
-
-
 contract TrustlessDonation {
     DonationToken private _donationToken;
     DonationNFT private _donationNFT;
