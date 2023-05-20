@@ -13,5 +13,8 @@
     "deploy": "npx thirdweb@latest deploy",
     "release": "npx thirdweb@latest release",
     "test": "npx hardhat test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.3"
   }
 }
