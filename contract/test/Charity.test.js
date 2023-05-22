@@ -34,7 +34,6 @@ beforeEach(async function () {
 
   it("Donation", async function () {
     // Create a donor and transfer tokens to them
-
     const [_, donor] = await ethers.getSigners();
     const amount = utils.parseEther("1");
     await donationToken.transfer(donor.address, amount);
