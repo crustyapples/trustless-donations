@@ -1,3 +1,8 @@
+<h1>trustless donations.</h1>
+
+Trustless Donations is an innovative application designed to revolutionize the process of charitable donations. It facilitates a transparent flow of donations from donors to charities to suppliers, promoting transparency for all parties involved. By leveraging blockchain technology and smart contracts, Trustless Donations ensures the integrity and accountability of every transaction.
+
+<img width="1432" alt="image" src="https://github.com/crustyapples/trustless-donations/assets/24990448/9b6e3559-1dd1-4446-95d1-ff8003ad5d47">
 
 
 <b>Tools used: </b>
@@ -5,8 +10,6 @@
 - thirdweb [Typescript](https://portal.thirdweb.com/typescript) and [React](https://portal.thirdweb.com/react) SDKs to interact with our smart contract
 
 - [Solidity](https://docs.soliditylang.org/en/v0.8.14/), [Hardhat](https://hardhat.org/), and [thirdweb deploy](https://portal.thirdweb.com/thirdweb-deploy) to develop, test, and deploy our smart contract.
-
-_To learn more about the contract, check out [this template](https://replit.com/@thirdweb-dev/Get-Started-with-Solidity-using-Hardhat-and-thirdweb-deploy)_.
 
 <br />
 
@@ -39,7 +42,7 @@ This template has two components:
 
 <h3>Deploying the contract</h3>
 
-To deploy the `Greeter` contract, change directories into the `contract` folder:
+To deploy the contracts, change directories into the `contract` folder:
 
 ```bash
 cd contract
