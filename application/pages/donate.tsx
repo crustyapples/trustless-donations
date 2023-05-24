@@ -7,6 +7,9 @@ import type { NextPage } from "next";
 import Nav from '../components/nav';
 import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, use, useEffect, useState } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
+import CharityCard from "../components/charityPool";
+import mockData from "../public/mockCharityPool";
+
 const sdk = new ThirdwebSDK("mumbai");
 
 // function to call inside useeffect scan for events where "CharityCreated"
@@ -47,12 +50,26 @@ const Donate: NextPage = () => {
   return (
     <div>
       <Nav/>
-      <h1>Registered Charities</h1>
-      <ul>
+      <h1 className="text-4xl font-bold text-center my-8">Registered Charities</h1>
+      {/* <ul>
         {charityAddresses.map((address: string , index: Key) => (
           <li key={index}>{address}</li>
         ))}
-      </ul>
+      </ul> */}
+      <div className="flex justify-center h-screen">
+      <div className="flex flex-wrap">
+        {mockData.map((charity, index) => (
+          <div className="m-4">
+          <CharityCard
+            key={index}
+            name={charity.charity.name}
+            contractAddress={charity.charity.contract_address}
+            totalDonated={charity.charity.total_donated}
+          />
+          </div>
+        ))}
+      </div>
+    </div>
     </div>
   );
 };
