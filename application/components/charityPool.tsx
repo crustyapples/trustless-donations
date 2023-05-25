@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+
+import { utils } from "ethers";
+import Approve from "./approveSpending";
+import Donate from "./donateButton";
+
+const sdk = new ThirdwebSDK("mumbai");
+
 
 interface CharityCardProps {
   name: string;
@@ -13,13 +21,6 @@ const CharityCard: React.FC<CharityCardProps> = ({
 }) => {
   const [donationAmount, setDonationAmount] = useState<number>(0);
 
-  const handleDonation = () => {
-    // Perform the donation logic here
-    console.log(`Donating ${donationAmount} to ${name}`);
-    // Reset the donation amount field after donation
-    setDonationAmount(0);
-  };
-
   return (
     <div className="bg-gray-100 hover:bg-black hover:text-white p-8 rounded-lg drop-shadow-lg transition-all border-2 border-black">
       <h2 className="text-2xl font-bold">{name}</h2>
@@ -32,12 +33,16 @@ const CharityCard: React.FC<CharityCardProps> = ({
             onChange={(e) => setDonationAmount(Number(e.target.value))}
             className="rounded-md py-2 px-4 bg-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
           />
-        <button
-          onClick={handleDonation}
-          className="bg-gray-300 hover:bg-gray-400 text-black m-1 px-4 py-2 rounded-md mt-2"
-        >
-          Donate
-        </button>
+
+        <Approve 
+          spender={contractAddress}
+          amount={donationAmount} 
+        />
+
+        <Donate
+          charityAddress={contractAddress}
+          amount={donationAmount} 
+        />
       </div>
     </div>
   );
