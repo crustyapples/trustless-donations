@@ -59,7 +59,7 @@ const Donate: NextPage = () => {
       <div className="flex justify-center h-screen">
       <div className="flex flex-wrap">
         {mockData.map((charity, index) => (
-          <div className="m-4">
+          <div className="m-2">
           <CharityCard
             key={index}
             name={charity.charity.name}

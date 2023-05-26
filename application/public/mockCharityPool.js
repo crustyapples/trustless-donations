@@ -13,6 +13,13 @@ export default [
         total_donated: 500.25
       }
     },
+    {
+      charity: {
+        name: "Charity C",
+        contract_address: "0x946Fa5791a625E248d2E692419692D9ed2760835",
+        total_donated: 250.75
+    }
+  }
 
   ];
   
