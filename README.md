@@ -70,20 +70,7 @@ We configure the desired blockchain/network in the [`_app.js`](./application/pag
 
 ```jsx
 // This is the chain your dApp will work on.
-const activeChain = "goerli";
-```
-
-Now we can easily call the functions of our [`Greeter`](./contract/Greeter.sol) contract, such as the `greet` and `setGreeting` contract by using the [useContractData](https://portal.thirdweb.com/react/react.usecontractdata) hook to read, and the [useContractCall](https://portal.thirdweb.com/react/react.usecontractcall) hook to write data.
-
-```jsx
-// Read the current greeting
-const { data: currentGreeting, isLoading } = useContractData(contract, "greet");
-
-// Write a new greeting
-const { mutate: writeGreeting, isLoading: isWriting } = useContractCall(
-  contract,
-  "setGreeting"
-);
+const activeChain = "mumbai";
 ```
 
 ### Connecting to user wallets
