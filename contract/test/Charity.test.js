@@ -21,7 +21,7 @@ beforeEach(async function () {
 
     await donationNFT.setCharityFactory(charityFactory.address);
 
-    await charityFactory.createCharityContract();
+    await charityFactory.createCharityContract("Test Charity");
 
     const filter = await charityFactory.filters.CharityCreated(null, null);
     const logs = await charityFactory.queryFilter(filter);
@@ -63,4 +63,15 @@ beforeEach(async function () {
       .to.emit(charity, "Purchase")
       .withArgs(charityOwner, supplier.address, amount);
   });
+
+  // Test that the charity owner can reset the charity name for the newly created trustless donations chariy contract
+  
+  it("Set Charity Name", async function () {
+    const [owner] = await ethers.getSigners();
+    // only the chariyOwner can call the setCharityName function in the charity contract
+    await expect(charity.connect(owner).setCharityName("New Charity Name"))
+      .to.emit(charity, "CharityNameChanged")
+      .withArgs(owner.address,"New Charity Name");
+      
+  })
 });

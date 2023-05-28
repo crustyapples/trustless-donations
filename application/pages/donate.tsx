@@ -12,6 +12,7 @@ import mockData from "../public/mockCharityPool";
 
 const sdk = new ThirdwebSDK("mumbai");
 
+
 // function to call inside useeffect scan for events where "CharityCreated"
 // then set state to the array of addresses returned from the event
 async function getCharityAddresses() {
@@ -45,6 +46,8 @@ const Donate: NextPage = () => {
   
     fetchCharityAddresses();
   }, []);
+
+  
   
 
   return (
