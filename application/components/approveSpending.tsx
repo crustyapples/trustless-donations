@@ -18,7 +18,7 @@ const Approve: React.FC<SpenderProps> = ({ spender, amount,onApprove }) => {
   const parsedAmount = utils.parseEther(amount.toString());
   return (
     <Web3Button
-      contractAddress="0xFC1A42F17d5a078cf31c531a881Fa5Bf1F412326"
+      contractAddress={process.env.NEXT_PUBLIC_DONATION_TOKEN!}
       action={async (contract) => {
         const success = await contract.call("approve", [spender, parsedAmount]).catch((error) => {console.log(error,"user rejected transaction")});
         if (success) {

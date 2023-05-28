@@ -17,7 +17,7 @@ const sdk = new ThirdwebSDK("mumbai");
 // then set state to the array of addresses returned from the event
 async function getCharityAddresses() {
   try {
-    const contract = await sdk.getContract("0x7412C56c6e0a8Fbe52058D6c4A2f3c5f910109B1");
+    const contract = await sdk.getContract(process.env.NEXT_PUBLIC_CHARITY_FACTORY!);
     const events = await contract.events.getEvents("CharityCreated");
     const charityAddresses = events.map((event) => event.data.charity);
     return charityAddresses;

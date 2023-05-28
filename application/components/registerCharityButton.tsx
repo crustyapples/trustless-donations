@@ -5,9 +5,9 @@ export default function RegisterCharity() {
     <Web3Button
     theme="light"
 
-      contractAddress="0x7412C56c6e0a8Fbe52058D6c4A2f3c5f910109B1"
+      contractAddress={process.env.NEXT_PUBLIC_CHARITY_FACTORY!}
       action={(contract) => {
-        contract.call("createCharityContract").catch((error) => {console.log("user rejected transaction")})
+        contract.call("createCharityContract",["Test Charity"]).catch((error) => {console.log("user rejected transaction")})
       }}
       onError={(error) => alert("Something went wrong!")}
     >
