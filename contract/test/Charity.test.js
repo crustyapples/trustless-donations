@@ -74,4 +74,24 @@ beforeEach(async function () {
       .withArgs(owner.address,"New Charity Name");
       
   })
+
+  // Set a supplier to the charity contract and test that the supplier can be removed by the charity owner
+
+  it("Register and Remove Supplier", async function () {
+    const [owner, supplier] = await ethers.getSigners();
+    await charity.registerSupplier(supplier.address);
+    await expect(charity.connect(owner).removeSupplier(supplier.address))
+      .to.emit(charity, "SupplierRemoved")
+      .withArgs(owner.address, supplier.address);
+  })
+
+  // Read supplier list from the charity contract
+
+  it("Read Supplier List", async function () {
+    const [_, supplier] = await ethers.getSigners();
+    await charity.registerSupplier(supplier.address);
+    const supplierList = await charity.getRegisteredSuppliers();
+    expect(supplierList).to.include(supplier.address);
+  })
+
 });

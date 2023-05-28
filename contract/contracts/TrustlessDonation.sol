@@ -9,12 +9,15 @@ contract TrustlessDonation {
     string public charityName;
     uint public totalDonations;
     address public charityOwner;
-    
+
     mapping(address => bool) suppliers;
+    address[] public supplierList;
     
     event Donation(address indexed donor, address indexed charity, uint256 amount, uint256 tokenId);
     event Purchase(address indexed charity, address indexed supplier, uint256 amount);
     event CharityNameChanged(address indexed charity, string newName);
+    event SupplierRegistered(address indexed charity, address indexed supplier);
+    event SupplierRemoved(address indexed charity, address indexed supplier);
 
     constructor(DonationToken donationToken, DonationNFT donationNFT, address _charityOwner, string memory _charityName) {
         _donationToken = donationToken;
@@ -38,10 +41,24 @@ contract TrustlessDonation {
     // TODO: Consider implementing this through a DAO voted proposal instead
     function registerSupplier(address _supplier) external onlyCharityOwner {
         suppliers[_supplier] = true;
+        supplierList.push(_supplier);
+        emit SupplierRegistered(msg.sender, _supplier);
     }
     
     function removeSupplier(address _supplier) external onlyCharityOwner {
         suppliers[_supplier] = false;
+        for (uint i = 0; i < supplierList.length; i++) {
+            if (supplierList[i] == _supplier) {
+                supplierList[i] = supplierList[supplierList.length - 1];
+                supplierList.pop();
+                break;
+            }
+        }
+        emit SupplierRemoved(msg.sender, _supplier);
+    }
+
+    function getRegisteredSuppliers() external view returns (address[] memory) {
+        return supplierList;
     }
 
     function donate(uint256 amount) external {
