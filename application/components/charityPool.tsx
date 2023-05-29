@@ -3,7 +3,7 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import ConfettiExplosion from "react-confetti-explosion";
 
 import { utils } from "ethers";
-import Approve from "./approveSpending";
+import Approve from "./approveButton";
 import Donate from "./donateButton";
 
 const sdk = new ThirdwebSDK("mumbai");
