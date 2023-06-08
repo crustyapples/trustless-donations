@@ -22,10 +22,6 @@ export default function Hero() {
           </Link>
         </button>
 
-        {/* <button className="rounded-lg bg-gray-800 text-white p-2 m-2 hover:bg-gray-600">
-          Register Your Charity
-        </button> */}
-
         <span>
         <input
           type="text"

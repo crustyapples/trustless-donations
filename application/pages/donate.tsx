@@ -1,23 +1,29 @@
-// - Display a list of registered charities.
-// - Include a search bar and filters to search for specific charities.
-// - Each charity card should show their charity name, brief information, and a donate button.
-// - When the donate button is clicked, a form should appear for the donor to enter the donation amount and approve the donation transaction.
-
 import type { NextPage } from "next";
-import Nav from '../components/nav';
-import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, use, useEffect, useState } from "react";
+import Nav from "../components/nav";
+import {
+  JSXElementConstructor,
+  Key,
+  PromiseLikeOfReactNode,
+  ReactElement,
+  ReactFragment,
+  ReactPortal,
+  use,
+  useEffect,
+  useState,
+} from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 import CharityCard from "../components/charityPool";
 import mockData from "../public/mockCharityPool";
 
 const sdk = new ThirdwebSDK("mumbai");
 
-
 // function to call inside useeffect scan for events where "CharityCreated"
 // then set state to the array of addresses returned from the event
 async function getCharityAddresses() {
   try {
-    const contract = await sdk.getContract(process.env.NEXT_PUBLIC_CHARITY_FACTORY!);
+    const contract = await sdk.getContract(
+      process.env.NEXT_PUBLIC_CHARITY_FACTORY!
+    );
     const events = await contract.events.getEvents("CharityCreated");
     const charityAddresses = events.map((event) => event.data.charity);
     return charityAddresses;
@@ -27,11 +33,10 @@ async function getCharityAddresses() {
   }
 }
 
-
 const Donate: NextPage = () => {
   // state of charity addresses
-  const [charityAddresses, setCharityAddresses] = useState<any>([""])
-  
+  const [charityAddresses, setCharityAddresses] = useState<any>([""]);
+
   useEffect(() => {
     const fetchCharityAddresses = async () => {
       try {
@@ -43,36 +48,35 @@ const Donate: NextPage = () => {
         console.error("Error fetching charity addresses:", error);
       }
     };
-  
+
     fetchCharityAddresses();
   }, []);
 
-  
-  
-
   return (
-    <div>
-      <Nav/>
-      <h1 className="text-4xl font-bold text-center my-8">Registered Charities</h1>
+    <div style={{ overflow: "hidden" }}>
+      <Nav />
+      <h1 className="text-4xl font-bold text-center my-8">
+        Registered Charities
+      </h1>
       {/* <ul>
         {charityAddresses.map((address: string , index: Key) => (
           <li key={index}>{address}</li>
         ))}
       </ul> */}
-      <div className="flex justify-center h-screen">
-      <div className="flex flex-wrap">
-        {mockData.map((charity, index) => (
-          <div className="m-2">
-          <CharityCard
-            key={index}
-            name={charity.charity.name}
-            contractAddress={charity.charity.contract_address}
-            totalDonated={charity.charity.total_donated}
-          />
-          </div>
-        ))}
+      <div className="flex justify-center">
+        <div className="flex flex-wrap">
+          {mockData.map((charity, index) => (
+            <div className="m-2">
+              <CharityCard
+                key={index}
+                name={charity.charity.name}
+                contractAddress={charity.charity.contract_address}
+                totalDonated={charity.charity.total_donated}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
