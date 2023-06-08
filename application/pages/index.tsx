@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Nav from "../components/nav";
-import Hero from "../components/hero";
+import Hero from "../components/heroSection";
 
 const Home: NextPage = () => {
   return (

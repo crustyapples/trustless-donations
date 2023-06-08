@@ -1,13 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import RegisterCharity from "./registerCharityButton";
-
-export default function Hero() {
-    
+export default function heroImage() {
     return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-5xl m-12 font-bold">trustless donations.</h1>
-      <svg
+        <svg
         xmlns="http://www.w3.org/2000/svg"
         width="500"
         height="350"
@@ -120,17 +113,5 @@ export default function Hero() {
           d="M206.435 11.87c-24.717-3.34-52.935 10.02-59.342 34.124A21.597 21.597 0 00106 48.103l2.83 2.026a372.275 372.275 0 00160.659-.726c-17.193-18.069-38.337-34.192-63.054-37.533zM100.435 79.87C75.718 76.53 47.5 89.89 41.093 113.994A21.597 21.597 0 000 116.103l2.83 2.026a372.275 372.275 0 00160.659-.726c-17.193-18.07-38.337-34.192-63.054-37.533z"
         ></path>
       </svg>
-      <div className="my-12">
-        <button className="rounded-lg bg-[#FF6584] text-white p-2 m-2 hover:bg-[#a14255]">
-          <Link href="/donate" legacyBehavior>
-            Donate Today
-          </Link>
-        </button>
-        {/* <button className="rounded-lg bg-gray-800 text-white p-2 m-2 hover:bg-gray-600">
-          Register Your Charity
-        </button> */}
-        <RegisterCharity />
-      </div>
-    </div>
-  );
+    )
 }
