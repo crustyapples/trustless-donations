@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import ConfettiExplosion from "react-confetti-explosion";
-
+import { abi } from "../public/TrustlessDonation.json";
 import { utils } from "ethers";
 import Approve from "./approveButton";
 import Donate from "./donateButton";
@@ -11,17 +11,31 @@ const sdk = new ThirdwebSDK("mumbai");
 interface CharityCardProps {
   name: string;
   contractAddress: string;
-  totalDonated: number;
+}
+
+const getTotalDonations = async (address: string) => {
+  const contract = await sdk.getContract(address);
+  const totalDonated = await contract.call("totalDonations",[]);
+  const totalDonatedDecimal = utils.formatEther(totalDonated);
+  console.log("totalDonated: ", totalDonatedDecimal);
+  return totalDonatedDecimal;
 }
 
 const CharityCard: React.FC<CharityCardProps> = ({
   name,
   contractAddress,
-  totalDonated,
 }) => {
   const [donationAmount, setDonationAmount] = useState<number>(0);
+  const [totalDonations, setTotalDonations] = useState<String>("");
   const [approved, setApproved] = useState<boolean>(false);
   const [isExploding, setIsExploding] = useState(false);
+
+  useEffect(() => {
+    // get total donations for the charity and setdonation amount
+    getTotalDonations(contractAddress).then((totalDonated) => {
+      setTotalDonations(totalDonated);
+    })
+  })
 
   return (
     <div className="bg-gray-100 hover:bg-black hover:text-white p-8 rounded-lg drop-shadow-lg transition-all border-2 border-black">
@@ -31,7 +45,7 @@ const CharityCard: React.FC<CharityCardProps> = ({
       <p className="font-light" >{contractAddress}</p>
       
       <p className="font-bold my-2">Total Donated: </p>
-      <p className="font-light">{totalDonated}</p>
+      <p className="font-light">{totalDonations}</p>
       <div className="mt-4">
         <input
           type="text"
