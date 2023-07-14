@@ -2,7 +2,7 @@ export default function heroImage() {
     return (
         <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="500"
+        width="auto"
         height="350"
         data-name="Layer 1"
         viewBox="0 0 896.268 640.726"

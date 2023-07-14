@@ -28,9 +28,12 @@ export default function Nav() {
   const buttonStyle =
     "px-4 py-2 mx-2 text-black rounded-lg bg-gray-100 hover:bg-gray-400 hover:text-black transition-all";
 
+  // help me centre my navigation items 
+  const navStyle = "flex items-center ml-4 mr-auto";
+
   return (
     <>
-      <nav className="flex justify-center bg-white py-6 border-b-2 border-black">
+      <nav className="md:flex sm:flex-wrap justify-center bg-white py-6 border-b-2 border-black">
         <div className="flex items-center ml-4 mr-auto">
           <Link href="/" legacyBehavior>
             <a
@@ -68,7 +71,9 @@ export default function Nav() {
         </div>
 
         <div className="mx-4">
-          <ConnectWallet theme='light' />
+          <ConnectWallet theme='light' style={{
+            width: '100%',
+          }}/>
         </div>
       </nav>
     </>

@@ -7,9 +7,9 @@ interface RegisterCharityProps {
 }
 
 const RegisterCharity: React.FC<RegisterCharityProps> = ({ charityName }) => {
-  let enabledStyle = "rounded-lg bg-black text-white p-2 my-2 ml-1 hover:bg-gray-600";
-  let loadingStyle = "rounded-lg bg-gray-600 text-white p-2 my-2 ml-1 hover:bg-gray-600";
-  let disabledStyle = "bg-gray-600 text-gray-200 p-2 my-2 ml-1 rounded-lg";
+  let enabledStyle = "rounded-lg bg-black text-white p-2 m-1 hover:bg-gray-600";
+  let loadingStyle = "rounded-lg bg-gray-600 text-white p-2 m-1 hover:bg-gray-600";
+  let disabledStyle = "bg-gray-600 text-gray-200 p-2 m-1 rounded-lg";
 
   const [buttonText, setButtonText] = useState("Register");
   const [buttonStyle, setButtonStyle] = useState(enabledStyle)

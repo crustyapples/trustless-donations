@@ -15,24 +15,23 @@ export default function Hero() {
       <h1 className="text-5xl m-12 font-bold">trustless donations.</h1>
 
       <HeroImage />
-      <div className="my-12">
-        <button className="rounded-lg bg-[#FF6584] text-white p-2 m-2 hover:bg-[#a14255]">
+      <div className="md:flex sm:flex-wrap my-12">
+        <button className="rounded-lg bg-[#FF6584] text-white p-2 m-1 hover:bg-[#a14255]">
           <Link href="/donate" legacyBehavior>
             Donate Today
           </Link>
         </button>
 
-        <span>
-        <input
-          type="text"
-          className="border border-gay-300 rounded-lg p-2 ml-2 my-2"
-          placeholder="Charity Name"
-          value={charityName}
-          onChange={handleInputChange}
-        />
-        <RegisterCharity charityName={charityName}/>
-        </span>
-
+        <div>
+          <input
+            type="text"
+            className="border border-gay-300 rounded-lg p-2 m-1"
+            placeholder="Charity Name"
+            value={charityName}
+            onChange={handleInputChange}
+          />
+          <RegisterCharity charityName={charityName} />
+        </div>
       </div>
     </div>
   );
