@@ -9,6 +9,7 @@ import {
   ConnectWallet,
 } from "@thirdweb-dev/react";
 import { useState } from "react";
+import TokenBalance from "./tokenBalance";
 
 export default function Nav() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function Nav() {
   const buttonStyle =
     "px-4 py-2 mx-2 text-black rounded-lg bg-gray-100 hover:bg-gray-400 hover:text-black transition-all";
 
-  // help me centre my navigation items 
+  // help me centre my navigation items
   const navStyle = "flex items-center ml-4 mr-auto";
 
   return (
@@ -70,10 +71,22 @@ export default function Nav() {
           </Link>
         </div>
 
-        <div className="mx-4">
-          <ConnectWallet theme='light' style={{
-            width: '100%',
-          }}/>
+        <div className="flex items-center mx-4">
+          <ConnectWallet
+            theme="light"
+            style={{
+              width: "100%",
+            }}
+            detailsBtn={() => {
+              return (
+                <TokenBalance
+                  account={user?.address}
+                  contractAddress="0xFC1A42F17d5a078cf31c531a881Fa5Bf1F412326"
+                  symbol="DNT"
+                />
+              );
+            }}
+          />
         </div>
       </nav>
     </>
